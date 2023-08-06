@@ -12,11 +12,11 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
-import Empty from "@/components/Empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import { EmptyCard } from "@/components/empty-card";
 
 export default function ConversationPage() {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
@@ -97,7 +97,7 @@ export default function ConversationPage() {
         )}
         {messages.length === 0 && !isLoading && (
           <div>
-            <Empty label="No conversation started" />
+            <EmptyCard label="No conversation started" />
           </div>
         )}
         <div className="flex flex-col-reverse gap-y-4">
