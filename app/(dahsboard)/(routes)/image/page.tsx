@@ -30,8 +30,10 @@ import {
 } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProMOdal } from "@/hooks/use-pro-modal";
 
 export default function ImagePage() {
+  const proModal = useProMOdal();
   const [images, setImages] = useState<string[]>([]);
   const router = useRouter();
   const form = useForm<TFormSchema>({
@@ -51,8 +53,10 @@ export default function ImagePage() {
       const response = await axios.post("/api/image", values);
       const urls = response.data.map((image: { url: string }) => image.url);
       setImages(urls);
-    } catch (error) {
-      // TODO: Open pro modal
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
       console.log(error);
     } finally {
       router.refresh();

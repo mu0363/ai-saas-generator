@@ -6,7 +6,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Sidebar } from "./sidebar";
 import { useEffect, useState } from "react";
 
-export function MobileSidebar() {
+type Props = {
+  apiLimitCount: number;
+};
+
+export function MobileSidebar({ apiLimitCount }: Props) {
   // MEMO: Avoid hydration errors from the sidebar when reload page
   const [isMounted, setMounted] = useState(false);
 
@@ -26,7 +30,7 @@ export function MobileSidebar() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar />
+        <Sidebar apiLimitCount={apiLimitCount} />
       </SheetContent>
     </Sheet>
   );
