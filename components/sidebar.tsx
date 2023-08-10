@@ -5,15 +5,13 @@ import {
   LayoutDashboard,
   MessageSquare,
   ImageIcon,
-  VideoIcon,
-  Music,
-  Code,
   Settings,
 } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FreeCounter } from "./free-counter";
 
 const montserrat = Montserrat({
   weight: "600",
@@ -47,7 +45,11 @@ const routes = [
   },
 ];
 
-export function Sidebar() {
+type Props = {
+  apiLimitCount: number;
+};
+
+export function Sidebar({ apiLimitCount = 0 }: Props) {
   const pathname = usePathname();
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -80,6 +82,7 @@ export function Sidebar() {
           ))}
         </div>
       </div>
+      <FreeCounter apiLimitCount={apiLimitCount} />
     </div>
   );
 }
