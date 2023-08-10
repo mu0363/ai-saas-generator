@@ -6,12 +6,14 @@ import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "./ui/progress";
 import { Button } from "./ui/button";
 import { Zap } from "lucide-react";
+import { useProMOdal } from "@/hooks/use-pro-modal";
 
 type Props = {
   apiLimitCount: number;
 };
 
 export function FreeCounter({ apiLimitCount = 0 }: Props) {
+  const proModal = useProMOdal();
   // MEMO: Avoid hydration errors from the sidebar when reload page
   const [isMounted, setMounted] = useState(false);
 
@@ -36,7 +38,11 @@ export function FreeCounter({ apiLimitCount = 0 }: Props) {
               value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
             />
           </div>
-          <Button className="w-full" variant="premium">
+          <Button
+            className="w-full"
+            variant="premium"
+            onClick={() => proModal.onOpen()}
+          >
             Upgrade
             <Zap className="w-4 h-4 ml-2 fill-white" />{" "}
           </Button>
