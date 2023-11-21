@@ -12,7 +12,6 @@ export default function LandingPage() {
         <Link href="/sign-up">
           <Button>Register</Button>
         </Link>
-        <p>revert test</p>
       </div>
     </div>
   );
